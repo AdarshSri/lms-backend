@@ -24,13 +24,13 @@ public class TypeMasterService implements ITypeMasterService {
     @Override
     public void createTypeMaster(TypeMasterDto typeMasterDto) throws LMSException {
         log.info("start createTypeMaster - {}", typeMasterDto);
-        if(null == typeMasterDto.getTypeMasterCode() || null == typeMasterDto.getTypeMasterName()){
+        if (null == typeMasterDto.getTypeMasterCode() || null == typeMasterDto.getTypeMasterName()) {
             log.error("createTypeMaster - mandatory fields are missing - {}", typeMasterDto);
             throw new LMSException("Mandatory fields are missing");
         }
 
         MstTypeMaster existingMstTypeMaster = iMstTypeMasterRepository.findByTypeMasterCode(typeMasterDto.getTypeMasterCode());
-        if(null != existingMstTypeMaster){
+        if (null != existingMstTypeMaster) {
             log.error("createTypeMaster - mstMasterCode should be unique - {}", existingMstTypeMaster.getTypeMasterCode());
             throw new LMSException("mstMasterCode should be unique");
         }
